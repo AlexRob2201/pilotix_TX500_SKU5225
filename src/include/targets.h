@@ -186,10 +186,12 @@ extern bool pwmSerialDefined;
 #undef Regulatory_Domain_EU_433
 #undef Regulatory_Domain_US_433
 #undef Regulatory_Domain_US_433_WIDE
-#undef Regulatory_Domain_P560
-#undef Regulatory_Domain_P600
-#undef Regulatory_Domain_P630
-#undef Regulatory_Domain_P650
+#undef Regulatory_Domain_P560_20
+#undef Regulatory_Domain_P580_40
+#undef Regulatory_Domain_P580_20
+#undef Regulatory_Domain_P600_20
+#undef Regulatory_Domain_P630_20
+#undef Regulatory_Domain_P650_20
 
 
 #elif defined(RADIO_SX127X) || defined(RADIO_LR1121)
@@ -197,8 +199,9 @@ extern bool pwmSerialDefined;
         defined(Regulatory_Domain_EU_868) || defined(Regulatory_Domain_IN_866) || \
         defined(Regulatory_Domain_AU_433) || defined(Regulatory_Domain_EU_433) || \
         defined(Regulatory_Domain_US_433) || defined(Regulatory_Domain_US_433_WIDE) || \
-        defined(Regulatory_Domain_P560) || defined(Regulatory_Domain_P600) || \
-        defined(Regulatory_Domain_P630) || defined(Regulatory_Domain_P650) || \
+        defined(Regulatory_Domain_P560_20) || defined(Regulatory_Domain_P580_40) || \
+        defined(Regulatory_Domain_P580_20) || defined(Regulatory_Domain_P600_20) || \
+        defined(Regulatory_Domain_P630_20) || defined(Regulatory_Domain_P650_20) || \
         defined(UNIT_TEST))
 #error "Regulatory_Domain is not defined for 900MHz device. Check user_defines.txt!"
 #endif

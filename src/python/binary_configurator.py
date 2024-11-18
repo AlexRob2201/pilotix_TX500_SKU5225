@@ -26,10 +26,12 @@ class RegulatoryDomain(Enum):
     eu_868 = 'eu_868'
     au_915 = 'au_915'
     fcc_915 = 'fcc_915'
-    P560 = 'P560'
-    P600 = 'P600'
-    P630 = 'P630'
-    P650 = 'P650'
+    P560_20 = 'P560_20'
+    P580_40 = 'P580_40'
+    P580_20 = 'P580_20'
+    P600_20 = 'P600_20'
+    P630_20 = 'P630_20'
+    P650_20 = 'P650_20'
 
     def __str__(self):
         return self.value
@@ -70,14 +72,18 @@ def domain_number(domain):
         return 6
     elif domain == RegulatoryDomain.us_433_wide:
         return 7
-    elif domain == RegulatoryDomain.P560:
+    elif domain == RegulatoryDomain.P560_20:
         return 8
-    elif domain == RegulatoryDomain.P600:
+    elif domain == RegulatoryDomain.P580_40:
         return 9
-    elif domain == RegulatoryDomain.P630:
+    elif domain == RegulatoryDomain.P580_20:
         return 10
-    elif domain == RegulatoryDomain.P650:
+    elif domain == RegulatoryDomain.P600_20:
         return 11
+    elif domain == RegulatoryDomain.P630_20:
+        return 12
+    elif domain == RegulatoryDomain.P650_20:
+        return 13
 
 def patch_unified(args, options):
     json_flags = {}

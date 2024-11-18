@@ -27,10 +27,12 @@
 #-DRegulatory_Domain_FCC_915
 #-DRegulatory_Domain_ISM_2400
 #-DRegulatory_Domain_EU_CE_2400
--DRegulatory_Domain_P560
-#-DRegulatory_Domain_P600
-#-DRegulatory_Domain_P630
-#-DRegulatory_Domain_P650
+-DRegulatory_Domain_P560_20
+#-DRegulatory_Domain_P580_40
+#-DRegulatory_Domain_P580_20
+#-DRegulatory_Domain_P600_20
+#-DRegulatory_Domain_P630_20
+#-DRegulatory_Domain_P650_20
 
 ### PERFORMANCE OPTIONS: ###
 

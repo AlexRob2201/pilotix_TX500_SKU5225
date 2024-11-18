@@ -167,14 +167,18 @@ if '-DRADIO_SX127X=1' in build_flags or '-DRADIO_LR1121=1' in build_flags:
         json_flags['domain'] = 6
     if fnmatch.filter(build_flags, '*-DRegulatory_Domain_US_433_WIDE'):
         json_flags['domain'] = 7
-    if fnmatch.filter(build_flags, '*-DRegulatory_Domain_P560'):
+    if fnmatch.filter(build_flags, '*-DRegulatory_Domain_P560_20'):
         json_flags['domain'] = 8
-    if fnmatch.filter(build_flags, '*-DRegulatory_Domain_P600'):
+    if fnmatch.filter(build_flags, '*-DRegulatory_Domain_P580_40'):
         json_flags['domain'] = 9
-    if fnmatch.filter(build_flags, '*-DRegulatory_Domain_P630'):
+    if fnmatch.filter(build_flags, '*-DRegulatory_Domain_P580_20'):
         json_flags['domain'] = 10
-    if fnmatch.filter(build_flags, '*-DRegulatory_Domain_P650'):
+    if fnmatch.filter(build_flags, '*-DRegulatory_Domain_P600_20'):
         json_flags['domain'] = 11
+    if fnmatch.filter(build_flags, '*-DRegulatory_Domain_P630_20'):
+        json_flags['domain'] = 12
+    if fnmatch.filter(build_flags, '*-DRegulatory_Domain_P650_20'):
+        json_flags['domain'] = 13
 else:
     json_flags['domain'] = 0
 
