@@ -199,10 +199,9 @@ static int timeout(devserial_ctx_t *ctx)
         return NO_SERIALIO_INTERVAL;
     }
 
-    // stop callbacks when serial driver wants immediate sends or when doing serial update
-    if ((*(ctx->io))->sendImmediateRC() || connectionState == serialUpdate)
+    if (connectionState == serialUpdate)
     {
-        return DURATION_NEVER;
+        return DURATION_NEVER;  // stop callbacks when doing serial update
     }
 
     /***
@@ -227,38 +226,13 @@ static int timeout(devserial_ctx_t *ctx)
     // Verify there is new ChannelData and they should be sent on
     bool sendChannels = confirmFrameAvailable(ctx);
 
-    return (*(ctx->io))->sendRCFrame(sendChannels, missed, ChannelData);
-}
+    uint32_t duration = (*(ctx->io))->sendRCFrame(sendChannels, missed, ChannelData);
 
-void sendImmediateRC()
-{
-    if (*(serial0.io) != nullptr && (*(serial0.io))->sendImmediateRC() && connectionState != serialUpdate)
-    {
-        bool missed = serial0.frameMissed;
-        serial0.frameMissed = false;
-
-        // Verify there is new ChannelData and they should be sent on
-        bool sendChannels = confirmFrameAvailable(&serial0);
-
-        (*(serial0.io))->sendRCFrame(sendChannels, missed, ChannelData);
-    }
-}
-
-void handleSerialIO()
-{
-    // still get telemetry and send link stats if there's no model match
-    if (*(serial0.io) != nullptr)
-    {
-        (*(serial0.io))->processSerialInput();
-        (*(serial0.io))->sendQueuedData((*(serial0.io))->getMaxSerialWriteSize());
-    }
-#if defined(PLATFORM_ESP32)
-    if (*(serial1.io) != nullptr)
-    {
-        (*(serial1.io))->processSerialInput();
-        (*(serial1.io))->sendQueuedData((*(serial1.io))->getMaxSerialWriteSize());
-    }
-#endif
+    // still get telemetry and send link stats if theres no model match
+    (*(ctx->io))->processSerialInput();
+    (*(ctx->io))->sendQueuedData((*(ctx->io))->getMaxSerialWriteSize());
+    
+    return duration;
 }
 
 static int timeout0()

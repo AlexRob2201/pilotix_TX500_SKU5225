@@ -6,11 +6,42 @@
 #include "CRSF.h"
 #include "config.h"
 
-#define MAVLINK_RC_PACKET_INTERVAL 10
-
 // Variables / constants for Mavlink //
 FIFO<MAV_INPUT_BUF_LEN> mavlinkInputBuffer;
 FIFO<MAV_OUTPUT_BUF_LEN> mavlinkOutputBuffer;
+
+#if defined(PLATFORM_STM32)
+// This is a dummy implementation for STM32, since we don't use Mavlink on STM32
+
+    SerialMavlink::SerialMavlink(Stream &out, Stream &in):
+    SerialIO(&out, &in),
+    // These init values don't matter here for STM32, since we don't use them
+    this_system_id(255),
+    this_component_id(0),
+    target_system_id(1),
+    target_component_id(1)
+{
+}
+
+uint32_t SerialMavlink::sendRCFrame(bool frameAvailable, bool frameMissed, uint32_t *channelData)
+{
+    return DURATION_NEVER;
+}
+
+int SerialMavlink::getMaxSerialReadSize()
+{
+    return 0;
+}
+
+void SerialMavlink::processBytes(uint8_t *bytes, u_int16_t size)
+{
+}
+
+void SerialMavlink::sendQueuedData(uint32_t maxBytesToSend)
+{
+}
+
+#else // ESP-based targets
 
 #define MAVLINK_COMM_NUM_BUFFERS 1
 #include "common/mavlink.h"
@@ -65,7 +96,7 @@ uint32_t SerialMavlink::sendRCFrame(bool frameAvailable, bool frameMissed, uint3
     uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
     _outputPort->write(buf, len);
     
-    return MAVLINK_RC_PACKET_INTERVAL;
+    return DURATION_IMMEDIATELY;
 }
 
 int SerialMavlink::getMaxSerialReadSize()
@@ -142,5 +173,7 @@ void SerialMavlink::sendQueuedData(uint32_t maxBytesToSend)
         }
     }
 }
+
+#endif // defined(PLATFORM_STM32)
 
 #endif // defined(TARGET_RX)

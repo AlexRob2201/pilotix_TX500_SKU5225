@@ -57,9 +57,11 @@
 						<div class="mui-select">
 							<select id='domain' name='domain'>
 								<option value='8'>550~570/20</option>
-								<option value='9'>590~610/20</option>
-								<option value='10'>620~640/20</option>
-								<option value='11'>640~660/20</option>
+								<option value='9'>565~595/40</option>
+								<option value='10'>565~595/20</option>
+								<option value='11'>590~610/20</option>
+								<option value='12'>620~640/20</option>
+								<option value='13'>640~660/20</option>
 							</select>
 							<label for="domain">Regulatory domain</label>
 						</div>
@@ -76,6 +78,10 @@
 						<div class="mui-textfield">
 							<input size='3' id='fan-runtime' name='fan-runtime' type='text'/>
 							<label for="fan-runtime">Fan runtime (s)</label>
+						</div>
+						<div id="has-highpower" class="mui-checkbox" style="display: none;">
+							<input id='unlock-higher-power' name='unlock-higher-power' type='checkbox'/>
+							<label for="unlock-higher-power">Unlock higher power</label>
 						</div>
 						<div class="mui-checkbox">
 							<input id='is-airport' name='is-airport' type='checkbox'/>
@@ -250,7 +256,6 @@
 									<option value='5'>DJI RS Pro</option>
 									<option value='6'>HoTT Telemetry</option>
 									<option value='7'>MAVLINK</option>
-									<option value='8'>DisplayPort</option>
 								</select>
 								<label for='serial-protocol'>Serial Protocol</label>
 							</div>
@@ -268,7 +273,6 @@
 									<option value='7'>HoTT Telemetry</option>
 									<option value='8'>Tramp</option>
 									<option value='9'>SmartAudio</option>
-									<option value='10'>DisplayPort</option>
 								</select>
 								<label for='serial1-protocol'>Serial2 Protocol</label>
 							</div>
